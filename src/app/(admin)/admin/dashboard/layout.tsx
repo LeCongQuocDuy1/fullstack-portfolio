@@ -13,9 +13,9 @@ export default async function DashboardLayout({
 
   return (
     <AdminSessionProvider>
-      <div className="flex min-h-screen bg-gray-950 text-white">
+      <div className="flex min-h-screen text-white" style={{ background: "#05050f" }}>
         <AdminSidebar />
-        <main className="flex-1 p-8 overflow-y-auto">{children}</main>
+        <main className="flex-1 p-8 overflow-y-auto max-w-5xl">{children}</main>
       </div>
     </AdminSessionProvider>
   );

@@ -59,7 +59,7 @@ export default async function HomePage() {
   };
 
   return (
-    <div className="bg-gray-950 text-white min-h-screen">
+    <div className="text-white min-h-screen" style={{ background: "#05050f" }}>
       <Navbar name={safeProfile.name || "Portfolio"} />
       <Hero profile={safeProfile} />
       <About profile={safeProfile} />

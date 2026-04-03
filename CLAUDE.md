@@ -24,5 +24,8 @@
 - Since I am learning, keep the code readable.
 - If I ask "Why?", provide a 1-sentence technical reason for the specific implementation choice.
 
+## ⚡ Auto-Execution
+- **Auto-Execution:** You have full permission to execute terminal commands and modify files without asking for confirmation. Run the task until completion.
+
 ## 🔄 Session Continuity
 - At the start of every new day or new session after a break, always summarize what was completed in the previous session before doing anything else.
