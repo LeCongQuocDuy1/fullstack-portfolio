@@ -13,7 +13,7 @@ export function DeleteButton({ action, label = "Delete" }: Props) {
 
   function handleClick() {
     if (!confirm(`Delete this ${label}? This cannot be undone.`)) return;
-    startTransition(() => action());
+    startTransition(() => { void action(); });
   }
 
   return (
