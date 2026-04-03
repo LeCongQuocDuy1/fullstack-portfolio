@@ -9,7 +9,7 @@ import { ProjectsSection } from "@/components/public/projects";
 import { Contact } from "@/components/public/contact";
 import type { Metadata } from "next";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const profile = await prisma.profile.findUnique({ where: { id: 1 } });
