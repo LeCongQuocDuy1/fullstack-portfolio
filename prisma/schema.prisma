@@ -1,0 +1,127 @@
+// =============================================================
+// PRISMA SCHEMA – Fullstack Portfolio / Online CV
+// =============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// =============================================================
+// ENUMS
+// =============================================================
+
+enum SkillCategory {
+  FRONTEND
+  BACKEND
+  DATABASE
+  DEVOPS
+  OTHER
+}
+
+// =============================================================
+// MODELS
+// =============================================================
+
+/// Personal info – single row (always id = 1)
+model Profile {
+  id          Int      @id @default(1)
+  name        String   @default("")
+  tagline     String   @default("")         // e.g. "Fullstack Developer"
+  bio         String   @default("") @db.Text
+  avatarUrl   String?
+  resumeUrl   String?
+  email       String   @default("")
+  phone       String?
+  location    String?
+  github      String?
+  linkedin    String?
+  twitter     String?
+  website     String?
+  updatedAt   DateTime @updatedAt
+
+  @@map("profile")
+}
+
+/// Work experience entries
+model Experience {
+  id          Int       @id @default(autoincrement())
+  company     String
+  position    String
+  description String    @db.Text
+  logoUrl     String?
+  location    String?
+  startDate   DateTime
+  endDate     DateTime?                     // null = "Present"
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("experiences")
+}
+
+/// Education entries
+model Education {
+  id          Int       @id @default(autoincrement())
+  school      String
+  degree      String                        // e.g. "Bachelor of Science"
+  field       String                        // e.g. "Computer Science"
+  description String?   @db.Text
+  logoUrl     String?
+  startDate   DateTime
+  endDate     DateTime?                     // null = "Present"
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("education")
+}
+
+/// Skill entries
+model Skill {
+  id        Int           @id @default(autoincrement())
+  name      String        @unique
+  icon      String?                         // e.g. "typescript" (Devicons key)
+  level     Int           @default(80)      // 0–100 proficiency
+  category  SkillCategory @default(OTHER)
+  order     Int           @default(0)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@map("skills")
+}
+
+/// Portfolio project entries
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  summary     String   @default("")
+  content     String   @db.Text
+  imageUrl    String?
+  demoUrl     String?
+  githubUrl   String?
+  techStack   String[]
+  category    String   @default("Web App")  // plain string – no FK needed
+  featured    Boolean  @default(false)
+  published   Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("projects")
+}
+
+/// Admin account – NextAuth Credentials
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String                          // bcrypt hashed
+  name      String   @default("Admin")
+  createdAt DateTime @default(now())
+
+  @@map("admin_users")
+}

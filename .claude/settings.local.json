@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /c/Users/Hi/Desktop/fullstack-portfolio && npm run dev > /tmp/portfolio-dev.log 2>&1 &",
+            "async": true,
+            "statusMessage": "Starting Next.js dev server..."
+          },
+          {
+            "type": "command",
+            "command": "cd /c/Users/Hi/Desktop/fullstack-portfolio && npx prisma studio > /tmp/portfolio-prisma.log 2>&1 &",
+            "async": true,
+            "statusMessage": "Starting Prisma Studio..."
+          }
+        ]
+      }
+    ]
+  }
+}
